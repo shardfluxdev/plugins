@@ -1,0 +1,45 @@
+{
+  "name": "shardflux",
+  "version": "0.7.1",
+  "description": "Persistent cloud workspaces for AI agents: run commands, servers, builds and a browser in a Linux computer that keeps its files and processes between sessions.",
+  "author": {
+    "name": "Shardflux",
+    "url": "https://shardflux.dev"
+  },
+  "homepage": "https://docs.shardflux.dev/reference/mcp",
+  "repository": "https://github.com/shardfluxdev/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["cloud", "sandbox", "workspace", "vm", "remote-execution", "browser", "mcp"],
+  "interface": {
+    "displayName": "Shardflux",
+    "shortDescription": "Persistent cloud workspaces for agents",
+    "longDescription": "Give Codex a persistent cloud computer. Codex opens a Shardflux workspace by key and runs commands, dev servers, builds, tests and a Chromium browser in it. The workspace keeps its files, packages and running processes between sessions, suspends when idle and wakes on the next call. Forks copy a workspace, memory included, for risky changes.",
+    "developerName": "Shardflux",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://shardflux.dev",
+    "privacyPolicyURL": "https://shardflux.dev/privacy",
+    "termsOfServiceURL": "https://shardflux.dev/terms",
+    "defaultPrompt": [
+      "Clone my repo into a Shardflux workspace called my-app, install it and run the tests",
+      "Start the dev server in my Shardflux workspace in the background and take a screenshot of it"
+    ],
+    "brandColor": "#0A0A0B",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
+  },
+  "skills": "./skills/",
+  "mcpServers": {
+    "shardflux": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@shardflux/mcp@0.7.1"],
+      "env": {
+        "SHARDFLUX_API_KEY": "${env:SHARDFLUX_API_KEY}",
+        "SHARDFLUX_TEMPLATE": "python-node-browser",
+        "SHARDFLUX_MCP_TOOL_TIMEOUT_MS": "55000",
+        "SHARDFLUX_AGENT_LABEL": "codex-plugin"
+      }
+    }
+  }
+}

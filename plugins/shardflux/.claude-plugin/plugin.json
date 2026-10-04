@@ -1,0 +1,45 @@
+{
+  "name": "shardflux",
+  "displayName": "Shardflux",
+  "version": "0.7.1",
+  "description": "Persistent cloud workspaces for AI agents: run commands, servers, builds and a browser in a Linux computer that keeps its files and processes between sessions.",
+  "author": {
+    "name": "Shardflux",
+    "url": "https://shardflux.dev"
+  },
+  "homepage": "https://docs.shardflux.dev/reference/mcp",
+  "repository": "https://github.com/shardfluxdev/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["cloud", "sandbox", "workspace", "vm", "remote-execution", "browser", "mcp"],
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://docs.shardflux.dev/reference/mcp",
+  "supportUrl": "https://github.com/shardfluxdev/community/issues",
+  "privacyPolicyUrl": "https://shardflux.dev/privacy",
+  "termsOfServiceUrl": "https://shardflux.dev/terms",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Shardflux API key",
+      "description": "A project API key (sfk_...) from https://app.shardflux.dev, under API keys. Its tool permissions decide which workspace tools Claude gets.",
+      "required": true,
+      "sensitive": true
+    },
+    "default_template": {
+      "type": "string",
+      "title": "Default template",
+      "description": "Template for new workspaces when Claude does not name one.",
+      "default": "python-node-browser"
+    }
+  },
+  "mcpServers": {
+    "shardflux": {
+      "command": "npx",
+      "args": ["-y", "@shardflux/mcp@0.7.1"],
+      "env": {
+        "SHARDFLUX_API_KEY": "${user_config.api_key}",
+        "SHARDFLUX_TEMPLATE": "${user_config.default_template}",
+        "SHARDFLUX_AGENT_LABEL": "claude-plugin"
+      }
+    }
+  }
+}
