@@ -1,6 +1,6 @@
 {
   "name": "shardflux",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Persistent cloud workspaces for AI agents: run commands, servers, builds and a browser in a Linux computer that keeps its files and processes between sessions.",
   "author": {
     "name": "Shardflux",
@@ -33,7 +33,7 @@
     "shardflux": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@shardflux/mcp@0.7.1"],
+      "args": ["-y", "@shardflux/mcp@0.8.0"],
       "env": {
         "SHARDFLUX_API_KEY": "${env:SHARDFLUX_API_KEY}",
         "SHARDFLUX_TEMPLATE": "python-node-browser",

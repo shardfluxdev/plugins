@@ -27,7 +27,7 @@ Requirements: Node.js 24 or later on the machine that runs Claude Code.
 
 ## What the plugin runs and sends
 
-- It starts `npx -y @shardflux/mcp@0.7.1` (the npm package [`@shardflux/mcp`](https://www.npmjs.com/package/@shardflux/mcp),
+- It starts `npx -y @shardflux/mcp@0.8.0` (the npm package [`@shardflux/mcp`](https://www.npmjs.com/package/@shardflux/mcp),
   Apache-2.0) as a local stdio MCP server.
 - That server sends each tool call, authenticated with your API key, to the Shardflux API (`https://api.shardflux.dev`)
   and to the workspace endpoints it returns (`*.shardflux.dev`). It sends nothing anywhere else and keeps no local
