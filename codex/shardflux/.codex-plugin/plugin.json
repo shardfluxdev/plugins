@@ -4,6 +4,7 @@
   "description": "Persistent cloud workspaces for AI agents: run commands, servers, builds and a browser in a Linux computer that keeps its files and processes between sessions.",
   "author": {
     "name": "Shardflux",
+    "email": "shardflux@heliosone.fi",
     "url": "https://shardflux.dev"
   },
   "homepage": "https://docs.shardflux.dev/reference/mcp",
@@ -20,31 +21,89 @@
   ],
   "interface": {
     "displayName": "Shardflux",
-    "shortDescription": "Persistent cloud workspaces for agents",
-    "longDescription": "Give Codex a persistent cloud computer. Codex opens a Shardflux workspace by key and runs commands, dev servers, builds, tests and a Chromium browser in it. The workspace keeps its files, packages and running processes between sessions, suspends when idle and wakes on the next call. Forks copy a workspace, memory included, for risky changes.",
+    "shortDescription": "Cloud computers for agents",
+    "longDescription": "Give your agent a persistent cloud computer. Open a Shardflux workspace by name and run commands, dev servers, builds, tests and a Chromium browser in it, read and write files, and use git. The workspace keeps its files, packages and running processes between sessions, suspends when idle and wakes on the next call. Forks copy a workspace, memory included, for risky changes. Sign in with your Shardflux account and choose the project the plugin works in; the connection appears on that project's API keys page, where you can revoke it at any time.",
     "developerName": "Shardflux",
     "category": "Developer Tools",
     "capabilities": [
-      "Read",
-      "Write"
+      "Run commands in a cloud workspace",
+      "Read and write files",
+      "Use git",
+      "Browse with Chromium",
+      "Suspend and resume workspaces"
     ],
     "websiteURL": "https://shardflux.dev",
     "privacyPolicyURL": "https://shardflux.dev/privacy",
     "termsOfServiceURL": "https://shardflux.dev/terms",
     "defaultPrompt": [
-      "Clone my repo into a Shardflux workspace called my-app, install it and run the tests",
-      "Start the dev server in my Shardflux workspace in the background and take a screenshot of it"
+      "Open a Shardflux workspace called my-app and tell me which Python and Node versions it has",
+      "Clone my repo into a Shardflux workspace, install it and run the tests",
+      "List my Shardflux workspaces and their states"
     ],
     "brandColor": "#0A0A0B",
     "composerIcon": "./assets/logo.png",
-    "logo": "./assets/logo.png"
+    "logo": "./assets/logo.png",
+    "supportURL": "https://github.com/shardfluxdev/community/issues"
   },
   "skills": "./skills/",
-  "mcpServers": {
-    "shardflux": {
-      "type": "http",
-      "url": "https://mcp.shardflux.dev/mcp",
-      "tool_timeout_sec": 150
+  "mcpServers": "./.mcp.json",
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Open a workspace and inspect its runtime",
+              "prompt": "Open a Shardflux workspace called review/demo and tell me which Python and Node.js versions it has.",
+              "tools_triggered": "workspace_open, exec",
+              "expected_behavior": "Opens (creating on first use) the workspace review/demo from the python-node-browser template, runs python3 --version and node --version in it, and reports both versions."
+            },
+            {
+              "description": "Write a file and run it",
+              "prompt": "In my review/demo workspace, create hello.py that prints today's date, run it and show me the output.",
+              "tools_triggered": "write_file, exec",
+              "expected_behavior": "Writes /home/user/hello.py in the workspace, runs it with python3 and shows the printed date."
+            },
+            {
+              "description": "Clone a repository and list its files",
+              "prompt": "Clone https://github.com/octocat/Hello-World into my review/demo workspace and list its files.",
+              "tools_triggered": "git_clone, list_files",
+              "expected_behavior": "Clones the public repository into the workspace and lists its files (README)."
+            },
+            {
+              "description": "List workspaces",
+              "prompt": "List my Shardflux workspaces and their states.",
+              "tools_triggered": "workspace_list",
+              "expected_behavior": "Lists the workspaces of the connected project with their keys and states (review/demo after the first case)."
+            },
+            {
+              "description": "Suspend when done",
+              "prompt": "I am done with review/demo for now. Suspend it once it has been idle for a minute.",
+              "tools_triggered": "workspace_suspend",
+              "expected_behavior": "Schedules the suspend of review/demo with after_seconds 60 and says the next tool call on it would resume it."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Deleting workspaces is not a tool",
+              "prompt": "Delete all of my Shardflux workspaces."
+            },
+            {
+              "description": "Billing and plan changes are not tools",
+              "prompt": "Upgrade my Shardflux plan to the next tier and charge my card."
+            },
+            {
+              "description": "The plugin does not run commands on the user's own computer",
+              "prompt": "Run rm -rf ~/Downloads on my laptop."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments."
+      },
+      "publication": {
+        "release_notes": "Shardflux workspaces through the hosted MCP server https://mcp.shardflux.dev/mcp (OAuth): open a persistent cloud workspace by name, run commands, edit files, use git and a browser, and suspend it when done."
+      }
     }
   }
 }
