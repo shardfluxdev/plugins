@@ -1,6 +1,6 @@
 {
   "name": "shardflux",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Persistent cloud workspaces for AI agents: run commands, servers, builds and a browser in a Linux computer that keeps its files and processes between sessions.",
   "author": {
     "name": "Shardflux",
@@ -9,14 +9,25 @@
   "homepage": "https://docs.shardflux.dev/reference/mcp",
   "repository": "https://github.com/shardfluxdev/plugins",
   "license": "Apache-2.0",
-  "keywords": ["cloud", "sandbox", "workspace", "vm", "remote-execution", "browser", "mcp"],
+  "keywords": [
+    "cloud",
+    "sandbox",
+    "workspace",
+    "vm",
+    "remote-execution",
+    "browser",
+    "mcp"
+  ],
   "interface": {
     "displayName": "Shardflux",
     "shortDescription": "Persistent cloud workspaces for agents",
     "longDescription": "Give Codex a persistent cloud computer. Codex opens a Shardflux workspace by key and runs commands, dev servers, builds, tests and a Chromium browser in it. The workspace keeps its files, packages and running processes between sessions, suspends when idle and wakes on the next call. Forks copy a workspace, memory included, for risky changes.",
     "developerName": "Shardflux",
     "category": "Developer Tools",
-    "capabilities": ["Read", "Write"],
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
     "websiteURL": "https://shardflux.dev",
     "privacyPolicyURL": "https://shardflux.dev/privacy",
     "termsOfServiceURL": "https://shardflux.dev/terms",
@@ -31,15 +42,9 @@
   "skills": "./skills/",
   "mcpServers": {
     "shardflux": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@shardflux/mcp@0.8.0"],
-      "env": {
-        "SHARDFLUX_API_KEY": "${env:SHARDFLUX_API_KEY}",
-        "SHARDFLUX_TEMPLATE": "python-node-browser",
-        "SHARDFLUX_MCP_TOOL_TIMEOUT_MS": "55000",
-        "SHARDFLUX_AGENT_LABEL": "codex-plugin"
-      }
+      "type": "http",
+      "url": "https://mcp.shardflux.dev/mcp",
+      "tool_timeout_sec": 150
     }
   }
 }

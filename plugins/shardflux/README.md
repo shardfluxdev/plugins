@@ -18,21 +18,26 @@ call. Forks copy a workspace, memory included, so Claude can try a risky change 
 
 ## Setup
 
-1. Create a project API key at https://app.shardflux.dev under **API keys**.
-2. Install the plugin. Claude Code asks for the key and stores it in your system's secure credential store.
+1. Install the plugin:
+
+   ```text
+   /plugin marketplace add shardfluxdev/plugins
+   /plugin install shardflux@shardflux
+   ```
+
+2. Run `/mcp`, select **plugin:shardflux:shardflux** and **Authenticate**. Sign in to Shardflux in the browser, choose
+   the project Claude works in, and select **Connect**.
 3. Ask Claude to do something in a workspace, for example: *"Clone my repo into a Shardflux workspace called
    `my-app`, install it and run the tests."*
 
-Requirements: Node.js 24 or later on the machine that runs Claude Code.
+No API key to copy and nothing to install on your machine.
 
-## What the plugin runs and sends
+## What the plugin connects to
 
-- It starts `npx -y @shardflux/mcp@0.8.0` (the npm package [`@shardflux/mcp`](https://www.npmjs.com/package/@shardflux/mcp),
-  Apache-2.0) as a local stdio MCP server.
-- That server sends each tool call, authenticated with your API key, to the Shardflux API (`https://api.shardflux.dev`)
-  and to the workspace endpoints it returns (`*.shardflux.dev`). It sends nothing anywhere else and keeps no local
-  copy of your workspace.
-- Commands, files and browsing happen inside your workspace in the cloud, not on your machine.
+- Shardflux's hosted MCP server, `https://mcp.shardflux.dev/mcp` (MCP Streamable HTTP, OAuth). Each tool call goes
+  there and runs in your workspace in the cloud: commands, files and browsing happen there, not on your machine.
+- The connection is a project API key named `<client> (MCP connector)`, listed on the project's **API keys** page at
+  https://app.shardflux.dev. Revoke it there to disconnect Claude.
 
 Privacy policy: https://shardflux.dev/privacy · Terms: https://shardflux.dev/terms · Support:
 https://github.com/shardfluxdev/community/issues

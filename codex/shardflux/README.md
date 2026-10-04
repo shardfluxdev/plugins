@@ -7,25 +7,23 @@ call. Forks copy a workspace, memory included, so Codex can try a risky change o
 
 ## Setup
 
-1. Create a project API key at https://app.shardflux.dev under **API keys**, and export it in the shell profile that
-   starts Codex: `export SHARDFLUX_API_KEY=sfk_...`
-2. Add the marketplace and install the plugin:
+```sh
+codex plugin marketplace add shardfluxdev/plugins
+codex plugin add shardflux@shardflux
+codex mcp login shardflux
+```
 
-   ```sh
-   codex plugin marketplace add shardfluxdev/plugins
-   codex plugin add shardflux@shardflux
-   ```
+`codex mcp login` opens Shardflux in your browser: sign in, choose the project Codex works in, and select **Connect**.
+No API key to copy and nothing to install on your machine.
 
-Requirements: Node.js 24 or later.
+## What the plugin connects to
 
-## What the plugin runs and sends
-
-- It starts `npx -y @shardflux/mcp@0.8.0` (the npm package [`@shardflux/mcp`](https://www.npmjs.com/package/@shardflux/mcp),
-  Apache-2.0) as a local stdio MCP server, with your `SHARDFLUX_API_KEY`.
-- That server sends each tool call to the Shardflux API (`https://api.shardflux.dev`) and to the workspace endpoints it
-  returns (`*.shardflux.dev`). It sends nothing anywhere else and keeps no local copy of your workspace.
-- Each tool call answers within 55 seconds, inside Codex's default 60-second tool timeout; a longer operation returns
-  its `operation_id`, and `operation_wait` keeps waiting.
+- Shardflux's hosted MCP server, `https://mcp.shardflux.dev/mcp` (MCP Streamable HTTP, OAuth). Each tool call goes
+  there and runs in your workspace in the cloud.
+- The connection is a project API key named `<client> (MCP connector)`, listed on the project's **API keys** page at
+  https://app.shardflux.dev. Revoke it there to disconnect Codex.
+- Tool calls get 150 seconds (`tool_timeout_sec`), above the server's 120-second per-call deadline; a longer operation
+  returns its `operation_id`, and `operation_wait` keeps waiting.
 
 Tools and the `shardflux-workspaces` skill: see https://docs.shardflux.dev/reference/mcp. Privacy policy:
 https://shardflux.dev/privacy · Terms: https://shardflux.dev/terms · Support:
