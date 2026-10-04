@@ -1,6 +1,6 @@
 {
   "name": "shardflux",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Persistent cloud workspaces for AI agents: run commands, servers, builds and a browser in a Linux computer that keeps its files and processes between sessions.",
   "author": {
     "name": "Shardflux",
