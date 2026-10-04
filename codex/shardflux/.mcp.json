@@ -2,7 +2,14 @@
   "mcpServers": {
     "shardflux": {
       "url": "https://mcp.shardflux.dev/mcp",
-      "tool_timeout_sec": 150
+      "tool_timeout_sec": 150,
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth"
+          }
+        }
+      }
     }
   }
 }
