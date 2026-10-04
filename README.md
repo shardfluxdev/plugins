@@ -1,6 +1,6 @@
 # Shardflux plugins
 
-Persistent cloud workspaces for AI agents. These plugins give Claude Code, Cowork and Codex the
+Persistent cloud workspaces for AI agents. These plugins give Claude Code and Codex the
 [Shardflux](https://shardflux.dev) MCP server and a skill for working in a workspace: a Linux computer in the cloud that
 keeps its files, packages and running processes between sessions, suspends when idle and wakes on the next call.
 

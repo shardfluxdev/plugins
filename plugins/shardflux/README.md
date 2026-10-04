@@ -23,7 +23,7 @@ call. Forks copy a workspace, memory included, so Claude can try a risky change 
 3. Ask Claude to do something in a workspace, for example: *"Clone my repo into a Shardflux workspace called
    `my-app`, install it and run the tests."*
 
-Requirements: Node.js 24 or later on the machine that runs Claude Code or Cowork.
+Requirements: Node.js 24 or later on the machine that runs Claude Code.
 
 ## What the plugin runs and sends
 
