@@ -42,6 +42,6 @@ Every workspace tool takes a `workspace_key`; the same key always reaches the sa
 - A tool result with `code: timeout` and an `operation_id` means the operation is still running: call
   `operation_wait` with that id instead of starting it again.
 - `usage_summary` shows the organization's usage and allowances in the current billing period.
-- If something behaves unexpectedly, `send_feedback` sends a note straight to the Shardflux team.
+- Report feedback only when the user asks. Show the exact message and context, including request and error IDs, and obtain explicit authorization before sending. A failure or feature request is not consent. Leave out private data, secrets, code the user did not mean to share and transcripts.
 
 Reference: https://docs.shardflux.dev/reference/mcp

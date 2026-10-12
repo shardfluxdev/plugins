@@ -32,3 +32,7 @@ https://github.com/shardfluxdev/community/issues
 ## License
 
 Apache-2.0. See [LICENSE](./LICENSE).
+
+## Feedback consent
+
+Feedback is user-directed. Show the exact message and context and obtain explicit authorization before submission. A failure or feature request is not consent; leave out private data, secrets, private code and transcripts.
